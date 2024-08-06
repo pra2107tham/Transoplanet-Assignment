@@ -40,7 +40,7 @@ app.post('/api/products', async (req, res) => {
       return res.status(400).json({ error: 'URL is required' });
     }
 
-    const urlResponse = await axios.post('/api/test', { domain: siteUrl });
+    const urlResponse = await axios.post('https://transoplanet-assignment.onrender.com/api/test', { domain: siteUrl });
     const url = urlResponse.data;
     console.log('Product sitemap URL:', url);
 
