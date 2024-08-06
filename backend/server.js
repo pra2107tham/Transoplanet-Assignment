@@ -22,6 +22,15 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
+import { dirname, join} from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+app.use(express.static(join(__dirname,'dist/')));
+app.get("/", (req, res) => {
+  res.sendFile(join(__dirname,'dist/index.html'));
+});
+
 app.post('/api/products', async (req, res) => {
   try {
     console.log('Received request for /api/products with body:', req.body);
@@ -31,7 +40,7 @@ app.post('/api/products', async (req, res) => {
       return res.status(400).json({ error: 'URL is required' });
     }
 
-    const urlResponse = await axios.post('http://localhost:3000/api/test', { domain: siteUrl });
+    const urlResponse = await axios.post('/api/test', { domain: siteUrl });
     const url = urlResponse.data;
     console.log('Product sitemap URL:', url);
 
