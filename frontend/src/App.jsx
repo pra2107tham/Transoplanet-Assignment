@@ -16,7 +16,7 @@ const App = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post("/api/products", { url: link });
+      const response = await axios.post("https://transoplanet-assignment.onrender.com/api/products", { url: link });
       console.log('API Response:', response.data);
       const products = response.data.products; 
       if (Array.isArray(products)) {
